@@ -1,3 +1,3 @@
-# HashMap
+# Binary Search Tree
 
-Practice using HashMap data structure with separate chaining using JS.
+Practice using balance binary search tree data structure using JS.
