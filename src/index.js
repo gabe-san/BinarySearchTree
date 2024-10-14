@@ -1,6 +1,4 @@
-// visualize BST
 import Tree from './binarytree';
-
 
 const BSTree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
 BSTree.root = BSTree.buildTree();
@@ -18,4 +16,6 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
   }
 };
 
+BSTree.insert(2, BSTree.root)
+console.log(BSTree.insert(2, BSTree.root))
 prettyPrint(BSTree.root)
