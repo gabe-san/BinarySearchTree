@@ -81,11 +81,28 @@ export default class Tree {
         return root.left
       }
       // Two children
-      // *find min of right subtree* or find max in left subtree
+      // find min of right subtree
       const minSibling = deleteHelper(root.right);
       root.data = minSibling.data;
       root.right = this.deleteItem(minSibling.data, root.right)
     }
     return root
+  }
+
+  find(value, node = this.root) {
+    let root = node;
+
+    while (root.data !== value) {
+      if (value < root.data) {
+        root = root.left
+      }
+      if (value > root.data) {
+        root = root.right
+      }
+      if (root === null) {
+        return null
+      }
+    }
+    return root;
   }
 }
