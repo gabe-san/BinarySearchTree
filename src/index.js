@@ -16,6 +16,4 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
   }
 };
 
-BSTree.insert(2, BSTree.root)
-console.log(BSTree.insert(2, BSTree.root))
 prettyPrint(BSTree.root)

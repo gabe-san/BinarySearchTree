@@ -1,4 +1,4 @@
-export default function checkDuplicateSortedArray(array) {
+function checkHelper(array) {
   if (array.length === 0) return [];
   const noDuplicatesArray = [array[0]];
   for (let i = 1; i < array.length; i++) {
@@ -8,3 +8,13 @@ export default function checkDuplicateSortedArray(array) {
   }
   return noDuplicatesArray
 }
+
+function deleteHelper(node) {
+  let curr = node;
+  while (curr.left !== null) {
+    curr = curr.left;
+  }
+  return curr;
+}
+
+export { deleteHelper, checkHelper }
