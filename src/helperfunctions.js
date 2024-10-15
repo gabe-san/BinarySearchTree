@@ -22,4 +22,5 @@ async function printNode(node) {
   console.log(`Current node: ${node.data}`);
 }
 
+
 export { deleteHelper, checkHelper, printNode }

@@ -17,5 +17,5 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
   }
 };
 
-BSTree.levelOrder(printNode);
+BSTree.postOrder(printNode, BSTree.root);
 prettyPrint(BSTree.root)

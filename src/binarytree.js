@@ -129,4 +129,59 @@ export default class Tree {
       if (current.right !== null) queue.enqueue(current.right)
     }
   }
+
+  async preOrder(callback, node) {
+    if (typeof callback !== 'function') {
+      throw new Error('Callback function must be provided')
+    };
+    const root = node;
+    if (root === null) return;
+    try {
+      // await in loop is fine as we expect a response one at a time
+      // eslint-disable-next-line no-await-in-loop
+      await callback(root)
+    }
+    catch (error) {
+      console.error('Callback error', error);
+    }
+    // must await otherwise reverts to BFS
+    await this.preOrder(callback, root.left);
+    await this.preOrder(callback, root.right);
+  }
+
+  async inOrder(callback, node) {
+    if (typeof callback !== 'function') {
+      throw new Error('Callback function must be provided')
+    };
+    const root = node;
+    if (root === null) return;
+    await this.inOrder(callback, root.left);
+    try {
+      // await in loop is fine as we expect a response one at a time
+      // eslint-disable-next-line no-await-in-loop
+      await callback(root)
+    }
+    catch (error) {
+      console.error('Callback error', error);
+    }
+    await this.inOrder(callback, root.right);
+  }
+
+  async postOrder(callback, node) {
+    if (typeof callback !== 'function') {
+      throw new Error('Callback function must be provided')
+    };
+    const root = node;
+    if (root === null) return;
+    await this.postOrder(callback, root.left);
+    await this.postOrder(callback, root.right);
+    try {
+      // await in loop is fine as we expect a response one at a time
+      // eslint-disable-next-line no-await-in-loop
+      await callback(root)
+    }
+    catch (error) {
+      console.error('Callback error', error);
+    }
+  }
 }
