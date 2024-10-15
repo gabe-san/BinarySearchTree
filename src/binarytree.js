@@ -107,19 +107,26 @@ export default class Tree {
     return root;
   }
 
-  levelOrder() {
-    if (this.root === null) return;
+  async levelOrder(callback) {
+    if (typeof callback !== 'function') {
+      throw new Error('Callback function must be provided')
+    };
+    if (this.root === null) {
+      return
+    };
     queue.enqueue(this.root)
     while (!queue.isEmpty()) {
       const current = queue.dequeue();
-      console.log(current);
+      try {
+        // await in loop is fine as we expect a response one at a time
+        // eslint-disable-next-line no-await-in-loop
+        await callback(current)
+      }
+      catch (error) {
+        console.error('Callback error', error);
+      }
       if (current.left !== null) queue.enqueue(current.left)
       if (current.right !== null) queue.enqueue(current.right)
     }
-    // BFS
-
-    // implement queue
-    // throw error if callback is not provided
-    // similar to forEach, when you traverse using BFS, do callback function on each node before moving to next one
   }
 }

@@ -1,4 +1,5 @@
 import Tree from './binarytree';
+import { printNode } from './helperfunctions';
 
 const BSTree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
 BSTree.root = BSTree.buildTree();
@@ -16,6 +17,5 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
   }
 };
 
-
-BSTree.levelOrder();
+BSTree.levelOrder(printNode);
 prettyPrint(BSTree.root)
