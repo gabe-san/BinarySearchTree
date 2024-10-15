@@ -1,5 +1,6 @@
 import Node from './node';
 import { deleteHelper, checkHelper } from './helperfunctions';
+import queue from './queue';
 
 export default class Tree {
   constructor(arr) {
@@ -104,5 +105,21 @@ export default class Tree {
       }
     }
     return root;
+  }
+
+  levelOrder() {
+    if (this.root === null) return;
+    queue.enqueue(this.root)
+    while (!queue.isEmpty()) {
+      const current = queue.dequeue();
+      console.log(current);
+      if (current.left !== null) queue.enqueue(current.left)
+      if (current.right !== null) queue.enqueue(current.right)
+    }
+    // BFS
+
+    // implement queue
+    // throw error if callback is not provided
+    // similar to forEach, when you traverse using BFS, do callback function on each node before moving to next one
   }
 }

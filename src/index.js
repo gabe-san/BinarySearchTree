@@ -15,7 +15,7 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
     prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
   }
 };
-console.log(BSTree.find(324, BSTree.root));
 
 
+BSTree.levelOrder();
 prettyPrint(BSTree.root)
