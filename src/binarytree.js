@@ -1,5 +1,5 @@
 import Node from './node';
-import { deleteHelper, checkHelper } from './helperfunctions';
+import { deleteHelper, checkHelper, createArray } from './helperfunctions';
 import queue from './queue';
 
 export default class Tree {
@@ -183,5 +183,78 @@ export default class Tree {
     catch (error) {
       console.error('Callback error', error);
     }
+  }
+
+  height(node) {
+    // empty tree is equal -1
+    if (node === null) return -1;
+    const root = node;
+    const leftHeight = this.height(root.left)
+    const rightHeight = this.height(root.right)
+    // height of node is max height of its subtrees plus one(important to account for connection to node)
+    return Math.max(leftHeight, rightHeight) + 1
+  }
+
+  depth(node) {
+    let depth = 0;
+    let current = this.root;
+    while (current) {
+      if (node.data < current.data) {
+        current = current.left
+        depth++;
+      } else if (node.data > current.data) {
+        current = current.right
+        depth++;
+      } else
+        return depth
+    }
+    return -1;
+  }
+
+  isBalanced(rootNode = this.root) {
+    // difference between heights of left subtree and right subtree of every node is not >1
+    function modifiedHeight(node) {
+      if (node === null) {
+        return 0;
+      }
+      const leftHeight = modifiedHeight(node.left);
+      if (leftHeight === -1) {
+        return -1;
+      }
+      const rightHeight = modifiedHeight(node.right);
+      if (rightHeight === -1) {
+        return -1;
+      }
+      if (Math.abs(leftHeight - rightHeight) > 1) {
+        return -1
+      }
+      return Math.max(leftHeight, rightHeight) + 1 // height of subtree
+    }
+    return modifiedHeight(rootNode) !== -1
+  }
+
+  async inOrderArray(callback, node, array = []) {
+    if (typeof callback !== 'function') {
+      throw new Error('Callback function must be provided')
+    };
+    const root = node;
+    if (root === null) return array;
+    await this.inOrderArray(callback, root.left, array);
+    try {
+      await callback(root, array);
+    }
+    catch (error) {
+      console.error('Callback error', error);
+    }
+    await this.inOrderArray(callback, root.right, array)
+    return array;
+  }
+
+  // if calling in a module, make sure to use top-level await
+  async rebalance() {
+    const data = await this.inOrderArray(createArray, this.root);
+    console.log(data);
+    this.arr = data;
+    this.root = this.buildTree(data)
   }
 }

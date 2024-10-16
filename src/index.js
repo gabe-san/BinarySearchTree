@@ -1,7 +1,7 @@
 import Tree from './binarytree';
-import { printNode } from './helperfunctions';
 
-const BSTree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
+const array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
+const BSTree = new Tree(array)
 BSTree.root = BSTree.buildTree();
 
 const prettyPrint = (node, prefix = '', isLeft = true) => {
@@ -17,5 +17,20 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
   }
 };
 
-BSTree.postOrder(printNode, BSTree.root);
 prettyPrint(BSTree.root)
+console.log(BSTree.isBalanced())
+
+BSTree.insert(2, BSTree.root);
+BSTree.insert(12, BSTree.root);
+BSTree.insert(244, BSTree.root);
+BSTree.insert(233, BSTree.root);
+BSTree.insert(22, BSTree.root);
+BSTree.insert(211, BSTree.root);
+
+prettyPrint(BSTree.root)
+console.log(BSTree.isBalanced())
+
+
+await BSTree.rebalance();
+prettyPrint(BSTree.root)
+console.log(BSTree.isBalanced())

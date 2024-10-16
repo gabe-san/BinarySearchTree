@@ -18,9 +18,12 @@ function deleteHelper(node) {
 }
 
 // callback function to test levelOrder() 
-async function printNode(node) {
+function printNode(node) {
   console.log(`Current node: ${node.data}`);
 }
 
+function createArray(node, array) {
+  array.push(node.data)
+}
 
-export { deleteHelper, checkHelper, printNode }
+export { deleteHelper, checkHelper, printNode, createArray }
