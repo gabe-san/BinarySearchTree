@@ -26,4 +26,9 @@ function createArray(node, array) {
   array.push(node.data)
 }
 
-export { deleteHelper, checkHelper, printNode, createArray }
+function generateRandomArray(min, max, length) {
+  // eslint-disable-next-line array-callback-return
+  return Array.from({ length }, () => Math.floor(Math.random() * (max - min + 1) + min))
+}
+
+export { deleteHelper, checkHelper, printNode, createArray, generateRandomArray }

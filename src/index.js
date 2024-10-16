@@ -1,8 +1,5 @@
 import Tree from './binarytree';
-
-const array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
-const BSTree = new Tree(array)
-BSTree.root = BSTree.buildTree();
+import { generateRandomArray, printNode } from './helperfunctions';
 
 const prettyPrint = (node, prefix = '', isLeft = true) => {
   if (node === null) {
@@ -17,20 +14,27 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
   }
 };
 
+const arr = generateRandomArray(0, 100, 10);
+console.log(arr)
+const BSTree = new Tree(arr);
+BSTree.root = BSTree.buildTree();
 prettyPrint(BSTree.root)
 console.log(BSTree.isBalanced())
-
-BSTree.insert(2, BSTree.root);
-BSTree.insert(12, BSTree.root);
-BSTree.insert(244, BSTree.root);
-BSTree.insert(233, BSTree.root);
-BSTree.insert(22, BSTree.root);
-BSTree.insert(211, BSTree.root);
-
+// console.log(BSTree.levelOrder(printNode))
+// console.log(BSTree.preOrder(printNode, BSTree.root))
+// console.log(BSTree.inOrder(printNode, BSTree.root))
+// console.log(BSTree.postOrder(printNode, BSTree.root))
+BSTree.insert(110, BSTree.root)
+BSTree.insert(130, BSTree.root)
+BSTree.insert(140, BSTree.root)
+BSTree.insert(150, BSTree.root)
+BSTree.insert(200, BSTree.root)
 prettyPrint(BSTree.root)
 console.log(BSTree.isBalanced())
-
-
 await BSTree.rebalance();
-prettyPrint(BSTree.root)
 console.log(BSTree.isBalanced())
+prettyPrint(BSTree.root)
+// console.log(BSTree.levelOrder(printNode))
+// console.log(BSTree.preOrder(printNode, BSTree.root))
+console.log(BSTree.inOrder(printNode, BSTree.root))
+// console.log(BSTree.postOrder(printNode, BSTree.root))
